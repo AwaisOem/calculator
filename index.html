@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="https://kit.fontawesome.com/115318d190.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            border: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+
+        .main-calc {
+            width: 350px;
+            height: calc(90%);
+            padding: 20px;
+            display: block;
+            background: rgba(255, 255, 255, 0.88);
+            border-radius: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5.1px);
+            -webkit-backdrop-filter: blur(5.1px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        #hamicn {
+            position: relative;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            background-color: orange;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .field {
+            height: 28%;
+            width: 100%;
+        }
+
+        .field>input {
+            background: transparent;
+            border: none;
+            color: orange;
+            font-size: 3rem;
+            width: 100%;
+            height: 100%;
+            text-align: right;
+            resize: none;
+            outline: none;
+            box-decoration-break: unset;
+        }
+
+        .grid {
+            height: 50%;
+            display: grid;
+            grid-gap: 1em;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            grid-auto-flow: unset;
+        }
+
+        .grid2 {
+            margin-top: 1rem;
+            height: 10%;
+            display: grid;
+            grid-gap: 1em;
+            grid-row-gap: 1em;
+            grid-template-columns: 2.2fr 1fr 1fr;
+            grid-auto-flow: unset;
+        }
+
+        .btns {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid rgba(255, 255, 255, 0.263);
+            border-radius: 40px;
+            background: linear-gradient(44deg, #e8e0e0, rgba(255, 255, 255, 0.88));
+            box-shadow: 6px 6px 12px #b5b5b5,
+                -6px -6px 12px #ffffff;
+            cursor: pointer;
+        }
+
+        .btns:hover {
+            opacity: 0.7 !important;
+        }
+
+        .grey {
+            background: linear-gradient(44deg, #918c8c, rgba(255, 255, 255, 0.88)) !important;
+        }
+
+        .orange {
+            background: linear-gradient(44deg, orange, rgba(231, 154, 10, 0.88)) !important;
+        }
+
+        .container>svg {
+            z-index: -1;
+            position: absolute;
+        }
+
+        #svg1 {
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        #svg2 {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #ham {
+            position: absolute;
+            z-index: 99;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: orange;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 40px;
+        }
+
+        #ham>a {
+            width: 80%;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 5px 0;
+            /* padding: 10px 30px; */
+        }
+
+        #ham a:hover {
+            background-color: rgba(242, 242, 242, 0.345);
+        }
+
+        .hide {
+            display: none !important;
+        }
+
+        #close {
+            cursor: pointer;
+            width: 80%;
+        }
+        #hamicn2 > svg
+        {
+            transform: rotateY(180deg);
+        }
+        #hamicn2 
+        {
+            position: relative;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            background-color: orange;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            
+        }
+
+        #ham2 {
+            position: absolute;
+            z-index: 99;
+            top: 0;
+            right: 0;
+            width: 100%;
+            min-height: 50%;
+            background-color: orange;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 40px;
+        }
+        #ham2>a {
+            width: 80%;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 5px 0;
+            /* padding: 10px 30px; */
+        }
+
+        #ham2 a:hover {
+            background-color: rgba(242, 242, 242, 0.345);
+        }
+
+        #close2 {
+            cursor: pointer;
+            width: 80%;
+        }
+        .flex-line
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .w-80
+        {
+            width: 80% !important;
+        }
+        .darkmode
+        {
+            padding: 10px 15px;
+            border-radius: 50%;
+            background-color: #3333;
+        }
+        .time
+        {
+            font-size:3rem;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(255, 255, 255);
+            letter-spacing:3px;
+        }
+        .time >  span
+        {
+            padding: 0 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" id="svg1">
+            <path fill="orange" fill-opacity="1"
+                d="M0,256L7.3,218.7C14.5,181,29,107,44,64C58.2,21,73,11,87,16C101.8,21,116,43,131,90.7C145.5,139,160,213,175,208C189.1,203,204,117,218,90.7C232.7,64,247,96,262,138.7C276.4,181,291,235,305,245.3C320,256,335,224,349,208C363.6,192,378,192,393,197.3C407.3,203,422,213,436,197.3C450.9,181,465,139,480,149.3C494.5,160,509,224,524,224C538.2,224,553,160,567,122.7C581.8,85,596,75,611,74.7C625.5,75,640,85,655,122.7C669.1,160,684,224,698,256C712.7,288,727,288,742,272C756.4,256,771,224,785,197.3C800,171,815,149,829,160C843.6,171,858,213,873,218.7C887.3,224,902,192,916,160C930.9,128,945,96,960,80C974.5,64,989,64,1004,96C1018.2,128,1033,192,1047,224C1061.8,256,1076,256,1091,261.3C1105.5,267,1120,277,1135,282.7C1149.1,288,1164,288,1178,288C1192.7,288,1207,288,1222,272C1236.4,256,1251,224,1265,192C1280,160,1295,128,1309,101.3C1323.6,75,1338,53,1353,37.3C1367.3,21,1382,11,1396,53.3C1410.9,96,1425,192,1433,240L1440,288L1440,0L1432.7,0C1425.5,0,1411,0,1396,0C1381.8,0,1367,0,1353,0C1338.2,0,1324,0,1309,0C1294.5,0,1280,0,1265,0C1250.9,0,1236,0,1222,0C1207.3,0,1193,0,1178,0C1163.6,0,1149,0,1135,0C1120,0,1105,0,1091,0C1076.4,0,1062,0,1047,0C1032.7,0,1018,0,1004,0C989.1,0,975,0,960,0C945.5,0,931,0,916,0C901.8,0,887,0,873,0C858.2,0,844,0,829,0C814.5,0,800,0,785,0C770.9,0,756,0,742,0C727.3,0,713,0,698,0C683.6,0,669,0,655,0C640,0,625,0,611,0C596.4,0,582,0,567,0C552.7,0,538,0,524,0C509.1,0,495,0,480,0C465.5,0,451,0,436,0C421.8,0,407,0,393,0C378.2,0,364,0,349,0C334.5,0,320,0,305,0C290.9,0,276,0,262,0C247.3,0,233,0,218,0C203.6,0,189,0,175,0C160,0,145,0,131,0C116.4,0,102,0,87,0C72.7,0,58,0,44,0C29.1,0,15,0,7,0L0,0Z">
+            </path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" id="svg2">
+            <path fill="orange" fill-opacity="1"
+                d="M0,256L7.3,218.7C14.5,181,29,107,44,64C58.2,21,73,11,87,16C101.8,21,116,43,131,90.7C145.5,139,160,213,175,208C189.1,203,204,117,218,90.7C232.7,64,247,96,262,138.7C276.4,181,291,235,305,245.3C320,256,335,224,349,208C363.6,192,378,192,393,197.3C407.3,203,422,213,436,197.3C450.9,181,465,139,480,149.3C494.5,160,509,224,524,224C538.2,224,553,160,567,122.7C581.8,85,596,75,611,74.7C625.5,75,640,85,655,122.7C669.1,160,684,224,698,256C712.7,288,727,288,742,272C756.4,256,771,224,785,197.3C800,171,815,149,829,160C843.6,171,858,213,873,218.7C887.3,224,902,192,916,160C930.9,128,945,96,960,80C974.5,64,989,64,1004,96C1018.2,128,1033,192,1047,224C1061.8,256,1076,256,1091,261.3C1105.5,267,1120,277,1135,282.7C1149.1,288,1164,288,1178,288C1192.7,288,1207,288,1222,272C1236.4,256,1251,224,1265,192C1280,160,1295,128,1309,101.3C1323.6,75,1338,53,1353,37.3C1367.3,21,1382,11,1396,53.3C1410.9,96,1425,192,1433,240L1440,288L1440,320L1432.7,320C1425.5,320,1411,320,1396,320C1381.8,320,1367,320,1353,320C1338.2,320,1324,320,1309,320C1294.5,320,1280,320,1265,320C1250.9,320,1236,320,1222,320C1207.3,320,1193,320,1178,320C1163.6,320,1149,320,1135,320C1120,320,1105,320,1091,320C1076.4,320,1062,320,1047,320C1032.7,320,1018,320,1004,320C989.1,320,975,320,960,320C945.5,320,931,320,916,320C901.8,320,887,320,873,320C858.2,320,844,320,829,320C814.5,320,800,320,785,320C770.9,320,756,320,742,320C727.3,320,713,320,698,320C683.6,320,669,320,655,320C640,320,625,320,611,320C596.4,320,582,320,567,320C552.7,320,538,320,524,320C509.1,320,495,320,480,320C465.5,320,451,320,436,320C421.8,320,407,320,393,320C378.2,320,364,320,349,320C334.5,320,320,320,305,320C290.9,320,276,320,262,320C247.3,320,233,320,218,320C203.6,320,189,320,175,320C160,320,145,320,131,320C116.4,320,102,320,87,320C72.7,320,58,320,44,320C29.1,320,15,320,7,320L0,320Z">
+            </path>
+        </svg>
+        <div class="main-calc">
+            <div class="flex-line">
+                <div id="ham" class="hide">
+                    <div id="close">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(255, 255, 255)">
+                            <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z">
+                            </path>
+                        </svg>
+                    </div>
+                    <a href="#">Scientific </a>
+                    <a href="#">GPA </a>
+                    <a href="#">Currency </a>
+                    <a href="#">Length </a>
+                    <a href="#">Tempreture </a>
+                    <a href="#">BMI</a>
+                    <a href="#">Age</a>
+                    <a href="#">Speed</a>
+                    <a href="#">Time</a>
+                    <a href="#">GB/MB Data</a>
+                    <a href="#">Number system</a>
+                </div>
+                <div id="hamicn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(255, 255, 255)">
+                        <path d="M4 11h12v2H4zm0-5h16v2H4zm0 12h7.235v-2H4z"></path>
+                    </svg>
+                </div>
+                <div id="ham2" class="hide">
+                    <div class="flex-line w-80">
+                        <div id="close2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(255, 255, 255)">
+                                <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="darkmode">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(255, 255, 255)" id="light" class="">
+                                <path d="M12.707 17.293 8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z">
+                                </path>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(255, 255, 255)" id="dark" class="hide">
+                                <path d="M4 11h12v2H4zm0-5h16v2H4zm0 12h7.235v-2H4z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="time"><span id="hours">00</span>:<span id="mints">00</span>:<span id="seconds">00</span></div>
+                    <a href="#">Help</a>
+                    <a href="#">Portfolio</a>
+                    <a href="#">About Dev</a>
+                </div>
+                <div id="hamicn2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" style="fill: rgb(255, 255, 255)">
+                        <path d="M4 11h12v2H4zm0-5h16v2H4zm0 12h7.235v-2H4z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="field">
+                <input type="text">
+            </div>
+            <div class="grid">
+                <div data-clear class="btns grey">C</div>
+                <div data-sign class="btns grey">+/-</div>
+                <div data-btn class="btns grey">%</div>
+                <div data-btn class="btns orange">÷</div>
+                <div data-btn class="btns">8</div>
+                <div data-btn class="btns">9</div>
+                <div data-btn class="btns">7</div>
+                <div data-btn class="btns orange">×</div>
+                <div data-btn class="btns">4</div>
+                <div data-btn class="btns">5</div>
+                <div data-btn class="btns">6</div>
+                <div data-btn class="btns orange">-</div>
+                <div data-btn class="btns">1</div>
+                <div data-btn class="btns">2</div>
+                <div data-btn class="btns">3</div>
+                <div data-btn class="btns orange">+</div>
+            </div>
+            <div class="grid2">
+                <div data-btn class="btns large">0</div>
+                <div data-btn class="btns">.</div>
+                <div data-equal class="btns orange">=</div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>
